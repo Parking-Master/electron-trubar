@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electron TruBar - You know it's your best option.</title>
+    <style>
+      html, body {
+        margin: 0 !important;
+        overflow-x: hidden !important;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        background: #555;
+        cursor: url(./cursor.png), default !important;
+      }
+      * {
+        cursor: url(./cursor.png), default !important;
+      }
+      .header {
+        position: relative;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 250px;
+        padding: 25px;
+        background: #444;
+        border-bottom: 2px solid #ee1111;
+      }
+      .nav {
+        position: fixed;
+        background: #444;
+        width: 100%;
+        height: 50px;
+        z-index: 100;
+        box-shadow: 0 0 2px 1px #555;
+      }
+      .nav .icon {
+        margin: 8px;
+        cursor: url(./pointer-cursor.png), pointer !important;
+        float: left;
+      }
+      a.text-anchor {
+        position: relative;
+        margin-right: 25px !important;
+        color: #ee1111;
+        text-decoration: none;
+        display: inline-block;
+        cursor: url(./pointer-cursor.png), pointer !important;
+      }
+      .nav .a-wrapper {
+        position: absolute;
+        top: 11px;
+        left: 50%;
+        margin-left: -109.6665px;
+      }
+      a.text-anchor:after {
+        content: "";
+        display: block;
+        height: 3px;
+        width: 0;
+        background: transparent;
+        transition: width .5s ease, background-color .5s ease;
+        -webkit-transition: width .5s ease, background-color .5s ease;
+        -moz-transition: width .5s ease, background-color .5s ease;
+      }
+      a.text-anchor:hover:after {
+        width: 100%;
+        background: currentColor;
+      }
+      .main-header-title {
+        transition: color 1.5s;
+        position: relative;
+        color: transparent;
+        top: 50%;
+        margin-top: -40px;
+        font-size: 40px;
+        cursor: url(./text-cursor.png), text !important;
+        display: inline-block;
+      }
+      .main-header-icon {
+        position: absolute;
+        left: 80%;
+        top: 50%;
+        margin-left: -15%;
+        margin-top: -9%;
+      }
+      ::selection {
+        background: #ee1111;
+      }
+      code {
+        background: #555;
+        color: #ee1111;
+        border-radius: 5px;
+        padding: 5px;
+        cursor: url(./pointer-cursor.png), pointer !important;
+        font-size: 16px;
+      }
+      img {
+        cursor: url(./pointer-cursor.png), pointer !important;
+        user-select: none !important;
+      }
+      .body .secondary-title {
+        color: #ee1111;
+        text-align: center;
+        font-size: 65px;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript><style>.main-header-title{color:#ee1111}</style></noscript>
+    <script>window.addEventListener("load", () => { document.querySelector(".main-header-title").style.color = "#ee1111"; });</script>
+    <div class="wrapper">
+      <div class="nav">
+        <a rel="nofollow" href="/"><img src="./electron.png" width="15%" class="icon" /></a>
+        <div class="a-wrapper">
+          <a class="text-anchor" rel="nofollow" href="/">Documentation</a>
+          <a class="text-anchor" rel="nofollow" href="/">GitHub</a>
+          <a class="text-anchor" rel="nofollow" href="/">Versions</a>
+        </div>
+      </div>
+      <div class="header">
+        <h1 class="main-header-title">
+          <i>"You know it's your best option."</i>
+          <br>
+          <code onclick="navigator.clipboard.writeText(this.textContent.split('$').splice(1).join('$').trim()),Notiflix.Notify.success('Copied to clipboard!')">$ npm install electron-trubar</code>
+          <span style="font-size:16px;">&mdash;</span>
+          <a class="text-anchor" href="https://www.npmjs.com/package/electron-trubar"><code class="downloads">0</code></a> <span style="font-size:16px;">Weekly downloads</span>
+        </h1>
+        <img class="main-header-icon" src="./animation.gif" width="30%" referrerpolicy="no-referrer" />
+      </div>
+      <div class="body">
+        <h1 class="secondary-title">0</h1>
+        <p style="text-align:center!important;color:#ee1111;">Downloads this week</p>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/notiflix/Notiflix@latest/dist/notiflix-aio-3.2.5.min.js"></script>
+    <script>let w=0;Notiflix.Notify.init({success:{background:"#333",textColor:"#ee1111",notiflixIconColor:"#ee1111"}});fetch("http://9677-35-243-184-74.ngrok.io/").then((function(t){t.text().then((function(t){window.weeklyDownloads=t;document.querySelector(".downloads").textContent=t;setInterval(() => { if (w >= (t - 0)) { return; } w += 1; document.querySelector(".secondary-title").textContent=w.toString()},10);}))}));</script>
+  </body>
+</html>
