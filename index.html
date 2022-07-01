@@ -201,6 +201,27 @@ app.on("ready", function() {
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <script src="https://cdn.jsdelivr.net/gh/notiflix/Notiflix@latest/dist/notiflix-aio-3.2.5.min.js"></script>
+<!DOCTYPE html><html><body><button onclick="updateWindow()">Try it</button><div class="fake-browser-ui"><div class="frame"><span onclick='this.parentElement.parentElement.style.display="none"'>&times;</span><span onclick='this.parentElement.parentElement.style.display="none"'>&minus;</span><span></span><p style="display:inline-block;position:relative;left:215px;margin-top:5px;color:#eee">Title</p></div><iframe src="about:blank" width="600" height="400" style="border:none!important"></iframe></div><style>.fake-browser-ui{position:absolute;padding:20px 0 0;border-radius:5px;background:#555;display:inline-block;position:relative;line-height:0;left:50%;margin-left:-300px;top:50%;cursor:default!important;box-shadow:0 0 10px 5px #777;z-index:999999;font-family:Arial,Helvetica,sans-serif;font-size:14px;border:1px solid rgba(68,68,68,.5)}.fake-browser-ui .frame{display:block;height:15px;position:absolute;top:5px;left:1px;border-bottom:2px solid #eee;width:100%;margin:-1px}.fake-browser-ui span{height:13px;width:13px;border-radius:8px;background:#777;float:left;margin:0 0 0 5px;font-size:10px;text-align:center;margin-top:-2px;color:transparent;display:inline-flex;align-items:center;justify-content:center}.fake-browser-ui .frame:hover span{color:#333}.fake-browser-ui iframe{background:#fff!important;border-bottom-right-radius:5px;border-bottom-left-radius:5px}</style><script>function colorValues(e){if(e){if("transparent"===e.toLowerCase())return[0,0,0,0];if("#"===e[0])return e.length<7&&(e="#"+e[1]+e[1]+e[2]+e[2]+e[3]+e[3]+(e.length>4?e[4]+e[4]:"")),[parseInt(e.substr(1,2),16),parseInt(e.substr(3,2),16),parseInt(e.substr(5,2),16),e.length>7?parseInt(e.substr(7,2),16)/255:1];if(-1===e.indexOf("rgb")){var r=document.body.appendChild(document.createElement("fictum")),t="rgb(1, 2, 3)";if(r.style.color=t,r.style.color!==t)return;if(r.style.color=e,r.style.color===t||""===r.style.color)return;e=getComputedStyle(r).color,document.body.removeChild(r)}return 0===e.indexOf("rgb")?(-1===e.indexOf("rgba")&&(e+=",1"),e.match(/[\.\d]+/g).map((function(e){return+e}))):void 0}}
+function updateWindow(options) {
+  let trbgc = colorValues(options.backgroundColor);
+  let e = document.querySelector(".fake-browser-ui");
+  e.style.background = options.backgroundColor;
+  for (let i = 0; i < trbgc.length; i++) {
+    trbgc[i] = trbgc[i] / 1.5;
+  }
+  e.innerHTML += `<style>
+        .fake-browser-ui span {
+          background: ${(trbgc.length >= 4 ? "rgba" : "rgb") + "(" + trbgc.join(", ") + ")"} !important;
+          ${options.trafficLightX ? ("left: " + options.trafficLightX + "px") : void(0)}
+          ${options.trafficLightY ? ("top: " + options.trafficLightY + "px") : void(0)}
+        }
+        .fake-browser-ui p {
+          color: ${options.textColor ? options.textColor : (trbgc.length >= 4 ? "rgba" : "rgb") + "(" + trbgc.join(", ") + ")"} !important;
+        }
+  </style>`;
+  options.title ? e.querySelector("p").textContent = options.title : void(0);
+  options.seam == false ? e.querySelector(".frame").style.border = "none" : void(0);
+}</script></body></html>
     <script>
       tippy('[data-tippy-content]');
       tippy('[data-tippy-arrow]');
