@@ -9,7 +9,7 @@
         margin: 0 !important;
         overflow-x: hidden !important;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        background: #555;
+        background: #494949;
         cursor: url(./cursor.png), default !important;
       }
       * {
@@ -95,14 +95,50 @@
         cursor: url(./pointer-cursor.png), pointer !important;
         font-size: 16px;
       }
+      pre {
+        background: #555;
+        color: #ee1111;
+        border-radius: 5px;
+        padding: 5px;
+        cursor: url(./pointer-cursor.png), pointer !important;
+        font-size: 16px;
+        display: inline-flex;
+      }
       img {
         cursor: url(./pointer-cursor.png), pointer !important;
         user-select: none !important;
       }
-      .body .secondary-title {
+      .body .secondary-title, .body .third-title, .body .fourth-title {
         color: #ee1111;
         text-align: center;
         font-size: 65px;
+      }
+      .tippy-box[data-theme~="trubar"] {
+        background: #555;
+        color: #ee1111;
+        font-family: 'Courier New', Courier, monospace;
+        border: none;
+        border-color: #ddd;
+      }
+      .tippy-arrow {
+        border-color: #ddd !important;
+      }
+      .tippy-box[data-theme~="parkingmaster"]::before {
+        border: none;
+        background: #ddd;
+      }
+      .tippy-arrow {
+        background: #ddd;
+      }
+      .rollup {
+        height: 20px;
+        background-color: transparent;
+        transition: height 1s, width 1s;
+      }
+      .rollup:hover {
+        height: 413px;
+        width: 550px;
+        position: fixed;
       }
     </style>
   </head>
@@ -129,11 +165,47 @@
         <img class="main-header-icon" src="./animation.gif" width="30%" referrerpolicy="no-referrer" />
       </div>
       <div class="body">
+        <div class="list" style="position:absolute;">
+        <p style="display:inline-block;color:red;">1.</p> <code onclick="navigator.clipboard.writeText(this.textContent.split('$').splice(1).join('$').trim()),Notiflix.Notify.success('Copied to clipboard!')">$ npm install electron-trubar --save</code> <span style="position:relative;top:6px;fill:#ee1111;cursor:url(./pointer-cursor.png), pointer !important;" data-tippy-content="Click code to copy" data-tippy-theme="trubar" data-tippy-arrow="false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 4h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"/></svg></span>
+        <br>
+        <br>
+        <p style="display:inline-block;color:red;">2.</p> <pre onclick="navigator.clipboard.writeText(this.textContent),Notiflix.Notify.success('Copied to clipboard!')" style="position:relative;">
+const { app, BrowserWindow } = require("electron");
+const TruBar = require("electron-trubar");
+
+app.on("ready", function() {
+  const mainWindow = new BrowserWindow({ ... });
+  TruBar(mainWindow, {
+    backgroundColor: "#333",
+    textColor: "#fff",
+    seam: true,
+    seamColor: "#eee",
+    height: 20,
+    trafficLightX: 6.5,
+    trafficLightY: 6.5,
+    title: "My app"
+  });
+});</pre>
+<br>
+<br>
+<img class="rollup" src="preview.png" width="550px" style="position:relative;margin-left:-15px" />
+        </div>
         <h1 class="secondary-title">0</h1>
         <p style="text-align:center!important;color:#ee1111;">Downloads this week</p>
+        <h1 class="third-title">0</h1>
+        <p style="text-align:center!important;color:#ee1111;">Versions</p>
+        <h1 class="fourth-title">0</h1>
+        <p style="text-align:center!important;color:#ee1111;">Kilobytes</p>
       </div>
     </div>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
     <script src="https://cdn.jsdelivr.net/gh/notiflix/Notiflix@latest/dist/notiflix-aio-3.2.5.min.js"></script>
-    <script>let w=0;Notiflix.Notify.init({success:{background:"#333",textColor:"#ee1111",notiflixIconColor:"#ee1111"}});fetch("https://0a3b-134-56-126-103.ngrok.io/").then((function(t){t.text().then((function(t){window.weeklyDownloads=t;document.querySelector(".downloads").textContent=t;setInterval(() => { if (w >= (t - 0)) { return; } w += 1; document.querySelector(".secondary-title").textContent=w.toString()},10);}))}));</script>
+    <script>
+      tippy('[data-tippy-content]');
+      tippy('[data-tippy-arrow]');
+      tippy('[data-tippy-theme]');
+      for(let i = 0; i < document.querySelectorAll("pre").length; i++) { document.querySelectorAll("pre")[i].innerHTML = document.querySelectorAll("pre")[i].innerHTML.replace(/\n/gi, "<br>"); } let u=0;let y=4.89;let x=9;let q=0;let w=0;Notiflix.Notify.init({success:{background:"#333",textColor:"#ee1111",notiflixIconColor:"#ee1111"}});fetch("https://0a3b-134-56-126-103.ngrok.io/").then((function(t){t.text().then((function(t){window.weeklyDownloads=t;document.querySelector(".downloads").textContent=t;setInterval(() => { if (w >= (t - 0)) { return; } w += 1; document.querySelector(".secondary-title").textContent=w.toString()},10);setInterval(() => { if (q >= x) { return; } q += 1; document.querySelector(".third-title").textContent=q.toString()},100);setInterval(() => { if (u >= y) { return; } u += .01; document.querySelector(".fourth-title").textContent=(u-.01).toFixed(2)},10)}))}));
+    </script>
   </body>
 </html>
