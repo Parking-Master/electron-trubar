@@ -293,7 +293,7 @@ app.on("ready", function() {
     </script>
     <script src="https://cdn.websitepolicies.io/lib/cookieconsent/1.0.3/cookieconsent.min.js" async></script>
     <script>
-      window.wpcc.init({border:"none",corners:"tiny",colors:{popup:{background:"#333",text:"#ee1111",border:"red"},button:{background:"#444",text:"#ee1111"}},content:{message:"Cookies are used on this site only for keeping login information.",link:"",button:"Close"}})
+      window.onload = () => window.wpcc.init({border:"none",corners:"tiny",colors:{popup:{background:"#333",text:"#ee1111",border:"red"},button:{background:"#444",text:"#ee1111"}},content:{message:"Cookies are used on this site only for keeping login information.",link:"",button:"Close"}});
     </script>
   </body>
 </html>
