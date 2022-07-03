@@ -10,10 +10,7 @@
         overflow-x: hidden !important;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         background: #494949;
-        cursor: url(./cursor.png), default !important;
-      }
-      * {
-        cursor: url(./cursor.png), default !important;
+        cursor: url(./cursor1.png), default !important;
       }
       .header {
         position: relative;
@@ -84,6 +81,9 @@
         margin-left: -15%;
         margin-top: -9%;
       }
+      .header *:not(.main-header-icon) {
+        z-index: 10 !important;
+      }
       ::selection {
         background: #ee1111;
       }
@@ -94,6 +94,14 @@
         padding: 5px;
         cursor: url(./pointer-cursor.png), pointer !important;
         font-size: 16px;
+      }
+      @media only screen and (max-width:1207px) {
+        .titles * {
+          margin-left: 50%;
+        }
+        .main-header-icon {
+          display: none !important;
+        }
       }
       pre {
         background: #555;
@@ -151,7 +159,7 @@
         cursor: text !important;
       }
       .code-edit:focus {
-        outline: 2px solid #999 !important;
+        outline: none !important;
       }
       .fake-browser-ui * {
         cursor: default !important;
@@ -162,6 +170,27 @@
       img{max-width:100%;height:auto}section{padding:60px 0}ul{margin:0;padding:0;list-style:none}.contact-area{border-bottom:1px solid #353C46}.contact-content p{font-size:15px;margin:30px 0 60px;position:relative}.contact-content p::after{background:#353C46;bottom:-30px;content:"";height:1px;left:50%;position:absolute;transform:translate(-50%);width:80%}.contact-content h6{color:#8b9199;font-size:15px;font-weight:400;margin-bottom:10px}.contact-content span{color:#353c47;margin:0 10px}.contact-social{margin-top:30px}.contact-social > ul{display:inline-flex}.contact-social ul li a{border:1px solid #8b9199;color:#8b9199;display:inline-block;height:40px;margin:0 10px;padding-top:7px;transition:all 0.4s ease 0s;width:40px}.contact-area a{color:#ee1111}.contact-social ul li a:hover{border:1px solid #aa0000;color:#aa0000}.contact-content img{max-width:210px}footer,section{background:#1A1E25;color:#868c96}footer p{padding:40px 0;text-align:center}footer img{width:44px}
       #NotiflixNotifyWrap {
         z-index: 9999 !important;
+      }
+      ir {
+        flex-wrap: wrap;
+      }
+      ir::after {
+        content: "";
+        width: 100%;
+      }
+      .dialog-btn-controls {
+        background: #333;
+        color: #ee1111;
+        border: none;
+        border-radius: 4px;
+        padding: 4px;
+        cursor: url(pointer-cursor.png), pointer !important;
+      }
+      h1, h2, h3, h4, h5, h6, p, span, pre, code, i, b, em, strong {
+        cursor: url(./text-cursor.png), text;
+      }
+      iframe {
+        cursor: url(cursor1.png), default !important;
       }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -213,12 +242,14 @@ app.on("ready", function() {
           <br>
           <br>
         </div>
-        <h1 class="secondary-title">0</h1>
-        <p style="text-align:center!important;color:#ee1111;">Downloads this week</p>
-        <h1 class="third-title">0</h1>
-        <p style="text-align:center!important;color:#ee1111;">Versions</p>
-        <h1 class="fourth-title">0</h1>
-        <p style="text-align:center!important;color:#ee1111;">Kilobytes</p>
+        <div class="titles">
+          <h1 class="secondary-title">0</h1>
+          <p style="text-align:center!important;color:#ee1111;">Downloads this week</p>
+          <h1 class="third-title">0</h1>
+          <p style="text-align:center!important;color:#ee1111;">Versions</p>
+          <h1 class="fourth-title">0</h1>
+          <p style="text-align:center!important;color:#ee1111;">Kilobytes</p>
+        </div>
         <br>
         <h1 style="text-align:center;color:#ee1111">Try it out</h1>
         <textarea style="position:absolute;left:50%;margin-left:-300px;z-index:51;margin-top:25px;width:598px;height:390px;" class="code-edit" onkeyup="updateWindow(JSON.parse(this.value))" autocomplete="off">
@@ -235,6 +266,10 @@ app.on("ready", function() {
         </textarea>
         <div class="fake-browser-ui" style="display:table-cell;vertical-align:middle;position:relative;float:left;left:50%!important;margin-left:-300px;"><div class="frame"><span>&times;</span><span>&minus;</span><span></span><p style="display:inline-block;position:relative;left:215px;margin-top:5px;color:#eee">Title</p></div><iframe src="about:blank" width="600" height="400" style="border:none!important"></iframe></div><style>.fake-browser-ui{position:absolute;padding:20px 0 0;border-radius:5px;background:#555;display:inline-block;position:relative;line-height:0;left:50%;margin-left:-300px;top:50%;cursor:default!important;box-shadow:0 0 10px 5px #777;z-index:50;font-family:Arial,Helvetica,sans-serif;font-size:14px;border:1px solid rgba(68,68,68,.5)}.fake-browser-ui .frame{display:block;height:15px;position:absolute;top:5px;left:1px;border-bottom:2px solid #eee;width:100%;margin:-1px}.fake-browser-ui span{height:13px;width:13px;border-radius:8px;background:#777;float:left;margin:0 0 0 5px;font-size:10px;text-align:center;margin-top:-2px;color:transparent;display:inline-flex;align-items:center;justify-content:center}.fake-browser-ui .frame:hover span{color:#333}.fake-browser-ui iframe{background:#555!important;border-bottom-right-radius:5px;border-bottom-left-radius:5px}</style><script>function colorValues(e){if(e){if("transparent"===e.toLowerCase())return[0,0,0,0];if("#"===e[0])return e.length<7&&(e="#"+e[1]+e[1]+e[2]+e[2]+e[3]+e[3]+(e.length>4?e[4]+e[4]:"")),[parseInt(e.substr(1,2),16),parseInt(e.substr(3,2),16),parseInt(e.substr(5,2),16),e.length>7?parseInt(e.substr(7,2),16)/255:1];if(-1===e.indexOf("rgb")){var r=document.body.appendChild(document.createElement("fictum")),t="rgb(1, 2, 3)";if(r.style.color=t,r.style.color!==t)return;if(r.style.color=e,r.style.color===t||""===r.style.color)return;e=getComputedStyle(r).color,document.body.removeChild(r)}return 0===e.indexOf("rgb")?(-1===e.indexOf("rgba")&&(e+=",1"),e.match(/[\.\d]+/g).map((function(e){return+e}))):void 0}}function updateWindow(t){let e=colorValues(t.backgroundColor||"#444"),r=document.querySelector(".fake-browser-ui");r.style.background=t.backgroundColor;for(let t=0;t<e.length;t++)e[t]=e[t]/1.5;r.innerHTML+=`<style>\n        .fake-browser-ui span {\n          background: ${(e.length>=4?"rgba":"rgb")+"("+e.join(", ")+")"} !important;\n          ${t.trafficLightX?"left: "+t.trafficLightX+"px":void 0}\n          ${t.trafficLightY?"top: "+t.trafficLightY+"px":void 0}\n        }\n        .fake-browser-ui p {\n          color: ${t.textColor?t.textColor:(e.length>=4?"rgba":"rgb")+"("+e.join(", ")+")"} !important;\n        }\n  </style>`,t.title&&(r.querySelector("p").textContent=t.title),0==t.seam&&(r.querySelector(".frame").style.border="none")}</script>
       </div>
+      <div style="margin-top:550px;">
+        <h1 style="text-align:center;color:#ee1111">How it works</h1>
+        <p style="text-align:center;color:#ee1111">Once installed, import/require it in your app or script.<br>Run the <code>TruBar()</code> function on your <i>created</i> window, with<br>your custom options. This function removes the current<br>titlebar and creates a new custom one in your app.</p>
+      </div>
       <iframe style="margin-top:200px;position:relative;width:100%;left:0;bottom:0;right:0;border:none;height:500px;overflow:none!important;" scrolling="no" src="footer.html"></iframe>
     </div>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -243,9 +278,13 @@ app.on("ready", function() {
     <script>
       function box(msg) {
         let box = document.createElement("div");
-        box.style = "color:#eee;text-align:center;padding-top:20px;position:fixed;background:#444;width:500px;left:50%;margin-left:-250px;height:350px;top:50%;margin-top:-175px;z-index:9999;";
-        box.innerHTML = msg;
+        let overBox = document.createElement("div");
+        box.style = "border-radius:5px;display:inline-block;padding-top:65px;align-items:center;justify-content:center;color:#eee;text-align:center;font-size:20px;position:fixed;background:#444;width:450px;left:50%;margin-left:-225px;height:225px;top:50%;margin-top:-112.5px;z-index:9999;";
+        overBox.style = "position:fixed;left:0;top:0;right:0;bottom:0;margin:0;padding:0;background:#222;opacity:0.5;width:100%;height:100%;display:block;z-index:9998";
+        box.innerHTML = msg + `<div style="position:relative;left:40%;top:40%;"><button class="dialog-btn-controls" id="close" onclick="this.parentElement.parentElement.remove();document.querySelector('.box-overlay').remove();">Close</button></div>`;
+        overBox.className = "box-overlay";
         document.body.appendChild(box);
+        document.body.appendChild(overBox);
       }
       tippy('[data-tippy-content]');
       tippy('[data-tippy-arrow]');
